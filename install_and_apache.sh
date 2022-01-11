@@ -2,8 +2,9 @@
 # create a sudo user to install arches under e.g 'archesadmin'
 project_name="project"
 username="archesadmin"
+arches_version="origin/stable/5.2.x"
 
-sudo su
+cd /home/$username
 
 apt update
 apt install software-properties-common
@@ -18,7 +19,7 @@ source env/bin/activate
 
 #setup arches
 cd arches
-git checkout origin/stable/5.2.x
+git checkout $arches_version
 yes | bash arches/install/ubuntu_setup.sh
 
 pip install wheel
@@ -26,6 +27,8 @@ pip install -e .
 pip install -r arches/install/requirements.txt
 
 yarn
+
+cd /home/$username/ 
 
 arches-project create $project_name
 cd $project_name
