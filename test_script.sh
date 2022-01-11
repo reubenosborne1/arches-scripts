@@ -1,43 +1,7 @@
 #!/bin/bash
-# create a sudo user to install arches under e.g 'archesadmin'
 project_name="project"
 username="archesadmin"
 arches_version="origin/stable/5.2.x"
-
-cd /home/$username
-
-apt update
-apt -y install software-properties-common
-echo | add-apt-repository ppa:deadsnakes/ppa # add enter
-apt -y install python3.8
-apt-get -y install python3.8-venv python3.8-dev
-
-git clone https://github.com/archesproject/arches.git
-
-python3.8 -m venv env
-source env/bin/activate
-
-#setup arches
-cd arches
-git checkout $arches_version
-yes | bash arches/install/ubuntu_setup.sh
-
-pip install wheel
-pip install -e .
-pip install -r arches/install/requirements.txt
-
-yarn
-
-cd /home/$username/ 
-
-arches-project create $project_name
-cd $project_name
-python manage.py setup_db - yes
-
-apt-get -y install apache2
-apt -y install apache2-dev python3-dev
-pip install mod_wsgi
-
 conf="# If you have mod_wsgi installed in your python virtual environment, paste the text generated
 # by 'mod_wsgi-express module-config' here, *before* the VirtualHost is defined.
 
@@ -93,32 +57,3 @@ conf="# If you have mod_wsgi installed in your python virtual environment, paste
 </VirtualHost>"
 
 conf > /etc/apache2/sites-available/000-default.conf
-
-service apache2 reload
-
-mkdir -p /home/$username/$project_name/$project_name/static/
-mkdir -p /home/$username/$project_name/$project_name/uploadedfiles/
-
-chmod 664 /home/$username/$project_name/$project_name/arches.log
-chgrp www-data /home/$username/$project_name/$project_name/arches.log
-
-chmod 775 /home/$username/$project_name/$project_name/uploadedfiles
-chgrp www-data /home/$username/$project_name/$project_name/uploadedfiles
-
-chmod 775 /home/$username/$project_name/$project_name
-chgrp www-data /home/$username/$project_name/$project_name
-
-chmod 775 /home/$username/$project_name/$project_name/static
-chgrp www-data /home/$username/$project_name/$project_name/static
-
-
-static_vars="STATIC_ROOT = os.path.join(APP_ROOT, 'static')
-STATIC_URL = '/static/'
-"
-
-static_vars >> /home/$username/$project_name/$project_name/settings.py
-
-cd /home/$username/$project_name/
-python manage.py collectstatic -yes
-
-service apache2 restart
