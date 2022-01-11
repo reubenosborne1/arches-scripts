@@ -1,5 +1,15 @@
 #!/bin/bash
-# create a sudo user to install arches under e.g 'archesadmin'
+
+# BEFORE RUNNING: 
+# 1. create a sudo user to install arches under e.g 'archesadmin'
+    # sudo adduser archesadmin
+    # sudo usermod -aG sudo archesadmin
+
+# 2. switch to the root user 
+    # sudo su 
+
+#3. Configure projet name, username and arches branch/tag below
+
 project_name="project"
 username="archesadmin"
 arches_version="origin/stable/5.2.x"
