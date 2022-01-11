@@ -7,9 +7,9 @@ arches_version="origin/stable/5.2.x"
 cd /home/$username
 
 apt update
-apt install software-properties-common
-add-apt-repository ppa:deadsnakes/ppa
-apt install python3.8
+apt -y install software-properties-common
+echo | add-apt-repository ppa:deadsnakes/ppa # add enter
+apt -y install python3.8
 apt-get -y install python3.8-venv python3.8-dev
 
 git clone https://github.com/archesproject/arches.git
@@ -34,8 +34,8 @@ arches-project create $project_name
 cd $project_name
 python manage.py setup_db
 
-apt-get install apache2
-apt install apache2-dev python3-dev
+apt-get -y install apache2
+apt -y install apache2-dev python3-dev
 pip install mod_wsgi
 
 conf="# If you have mod_wsgi installed in your python virtual environment, paste the text generated
