@@ -32,7 +32,7 @@ cd /home/$username/
 
 arches-project create $project_name
 cd $project_name
-python manage.py setup_db - yes
+yes | python manage.py setup_db
 
 apt-get -y install apache2
 apt -y install apache2-dev python3-dev
@@ -92,7 +92,7 @@ conf="# If you have mod_wsgi installed in your python virtual environment, paste
 
 </VirtualHost>"
 
-conf > /etc/apache2/sites-available/000-default.conf
+echo "$conf" > /etc/apache2/sites-available/000-default.conf
 
 service apache2 reload
 
@@ -116,9 +116,9 @@ static_vars="STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 STATIC_URL = '/static/'
 "
 
-static_vars >> /home/$username/$project_name/$project_name/settings.py
+echo "$static_vars" >> /home/$username/$project_name/$project_name/settings.py
 
 cd /home/$username/$project_name/
-python manage.py collectstatic -yes
+yes | python manage.py collectstatic
 
 service apache2 restart
