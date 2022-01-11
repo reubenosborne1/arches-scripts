@@ -56,4 +56,4 @@ conf="# If you have mod_wsgi installed in your python virtual environment, paste
 
 </VirtualHost>"
 
-echo $conf > /etc/apache2/sites-available/000-default.conf
+echo "$conf" > /etc/apache2/sites-available/000-default.conf
