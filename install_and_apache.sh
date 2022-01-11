@@ -41,14 +41,13 @@ pip install mod_wsgi
 conf="# If you have mod_wsgi installed in your python virtual environment, paste the text generated
 # by 'mod_wsgi-express module-config' here, *before* the VirtualHost is defined.
 
+LoadModule wsgi_module "/home/$username/env/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py38.cpython-38-x86_64-linux-gnu.so"
+WSGIPythonHome "/home/$username/env/"
+
 <VirtualHost *:80>
 
     WSGIDaemonProcess arches python-path=/home/$username/$project_name
     WSGIScriptAlias / /home/$username/$project_name/$project_name/wsgi.py process-group=arches
-
-    LoadModule wsgi_module "/home/$username/$project_name/env/lib/python3.8/site-packages/mod_wsgi/server/mod_wsgi-py38.cpython-38-x86_64-linux-gnu.so"
-    WSGIPythonHome "/home/$username/$project_name/env"
-
 
     # Necessary to support Arches Collector
     WSGIPassAuthorization on
