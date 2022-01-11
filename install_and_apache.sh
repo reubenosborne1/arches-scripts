@@ -22,6 +22,8 @@ echo | add-apt-repository ppa:deadsnakes/ppa # add enter
 apt -y install python3.8
 apt-get -y install python3.8-venv python3.8-dev
 
+apt-get -y install git
+
 git clone https://github.com/archesproject/arches.git
 
 python3.8 -m venv env
