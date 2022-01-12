@@ -13,6 +13,7 @@
 project_name="project"
 username="archesadmin"
 arches_version="origin/stable/5.2.x"
+my_host="54.246.73.39"
 
 cd /home/$username
 
@@ -132,4 +133,11 @@ echo "$static_vars" >> /home/$username/$project_name/$project_name/settings.py
 cd /home/$username/$project_name/
 yes | python manage.py collectstatic
 
+service apache2 restart
+
+cd /home/$username/$project_name/$project_name/
+rm settings.py
+wget https://raw.githubusercontent.com/eamena-oxford/eamena-arches-dev/main/training/settings_template.py
+cat settings_template.py | sed -e "s/my_host/$my_host/" >> settings.py
+rm settings_template.py
 service apache2 restart
