@@ -12,6 +12,7 @@
 
 project_name="project"
 username="archesadmin"
+my_host="54.246.73.39"
 arches_version="origin/stable/5.2.x"
 
 cd /home/$username
@@ -128,6 +129,8 @@ STATIC_URL = '/static/'
 "
 
 echo "$static_vars" >> /home/$username/$project_name/$project_name/settings.py
+allowed_hosts="ALLOWED_HOSTS = ['$my_host']"
+echo "$allowed_hosts" >> /home/$username/$project_name/$project_name/setting.py
 
 cd /home/$username/$project_name/
 yes | python manage.py collectstatic
