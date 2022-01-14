@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 
 echo "$static_vars" >> /home/$username/$project_name/$project_name/settings.py
 allowed_hosts="ALLOWED_HOSTS = ['$my_host']"
-echo "$allowed_hosts" >> /home/$username/$project_name/$project_name/setting.py
+echo "$allowed_hosts" >> /home/$username/$project_name/$project_name/settinsg.py
 
 cd /home/$username/$project_name/
 yes | python manage.py collectstatic
