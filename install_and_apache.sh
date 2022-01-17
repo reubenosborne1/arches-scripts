@@ -136,8 +136,8 @@ cd /home/$username/$project_name/
 
 yes | python manage.py collectstatic
 
-sudo chown $username -R /home/$username/env
-sudo chown $username -R /home/$username/arches
-sudo chown $username -R /home/$username/$project_name
+chown $username -R /home/$username/env
+chown $username -R /home/$username/arches
+chown $username -R /home/$username/$project_name
 
 service apache2 restart
