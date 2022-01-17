@@ -127,12 +127,17 @@ chgrp www-data /home/$username/$project_name/$project_name/static
 static_vars="STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 STATIC_URL = '/static/'
 "
-
 echo "$static_vars" >> /home/$username/$project_name/$project_name/settings.py
+
 allowed_hosts="ALLOWED_HOSTS = ['$my_host']"
 echo "$allowed_hosts" >> /home/$username/$project_name/$project_name/settings.py
 
 cd /home/$username/$project_name/
+
 yes | python manage.py collectstatic
+
+sudo chown $username -R /home/$username/env
+sudo chown $username -R /home/$username/arches
+sudo chown $username -R /home/$username/$project_name
 
 service apache2 restart
