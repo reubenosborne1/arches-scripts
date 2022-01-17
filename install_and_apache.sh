@@ -111,18 +111,6 @@ service apache2 reload
 mkdir -p /home/$username/$project_name/$project_name/static/
 mkdir -p /home/$username/$project_name/$project_name/uploadedfiles/
 
-chmod 664 /home/$username/$project_name/$project_name/arches.log
-chgrp www-data /home/$username/$project_name/$project_name/arches.log
-
-chmod 775 /home/$username/$project_name/$project_name/uploadedfiles
-chgrp www-data /home/$username/$project_name/$project_name/uploadedfiles
-
-chmod 775 /home/$username/$project_name/$project_name
-chgrp www-data /home/$username/$project_name/$project_name
-
-chmod 775 /home/$username/$project_name/$project_name/static
-chgrp www-data /home/$username/$project_name/$project_name/static
-
 
 static_vars="STATIC_ROOT = os.path.join(APP_ROOT, 'static')
 STATIC_URL = '/static/'
@@ -139,5 +127,17 @@ yes | python manage.py collectstatic
 chown $username -R /home/$username/env
 chown $username -R /home/$username/arches
 chown $username -R /home/$username/$project_name
+
+chmod 664 /home/$username/$project_name/$project_name/arches.log
+chgrp www-data /home/$username/$project_name/$project_name/arches.log
+
+chmod 775 /home/$username/$project_name/$project_name/uploadedfiles
+chgrp www-data /home/$username/$project_name/$project_name/uploadedfiles
+
+chmod 775 /home/$username/$project_name/$project_name
+chgrp www-data /home/$username/$project_name/$project_name
+
+chmod 775 -R /home/$username/$project_name/$project_name/static
+chgrp www-data -R /home/$username/$project_name/$project_name/static
 
 service apache2 restart
