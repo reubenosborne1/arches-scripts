@@ -14,7 +14,7 @@ arches_version="origin/stable/5.2.x"
 # your project name, replace 'xxxx' by your country name
 project_name="xxxx_project"
 
-# your project name, replace 'xx.xx.xx.xx' by the IPv4 Public address of your host
+# replace 'xx.xx.xx.xx' by the IPv4 Public address of your host
 my_host="xx.xx.xx.xx"
 
 cd /home/$username
