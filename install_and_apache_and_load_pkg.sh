@@ -1,19 +1,21 @@
 #!/bin/bash
 
-# BEFORE RUNNING: 
+# BEFORE RUNNING, CHECK THAT THESE PARAMETERS ARE UP TO DATE: 
 # 1. create a sudo user to install arches under e.g 'archesadmin'
     # sudo adduser archesadmin
     # sudo usermod -aG sudo archesadmin
-
 # 2. switch to the root user 
     # sudo su 
-
 #3. Configure projet name, username and arches branch/tag below
 
-project_name="project"
 username="archesadmin"
-my_host="54.246.73.39"
 arches_version="origin/stable/5.2.x"
+
+# your project name, replace 'xxxx' by your country name
+project_name="xxxx_project"
+
+# replace 'xx.xx.xx.xx' by the IPv4 Public address of your host
+my_host="xx.xx.xx.xx"
 
 cd /home/$username
 
